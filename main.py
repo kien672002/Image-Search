@@ -24,7 +24,7 @@ def get_image_list(image_root):
         if image_path.exists() and image_path.suffix.lower() in ACCEPTED_IMAGE_EXTS:
             image_list.append(image_path)
     image_list = sorted(image_list, key=lambda x: int(
-        x.name.split('.')[0].split('_')[1]))
+        x.name.split('.')[0].split('_')[-1]))
     return image_list
 
 
@@ -37,7 +37,7 @@ def visualize_result(image_paths):
 def main():
     parser = ArgumentParser()
     parser.add_argument("--image_root", required=True, type=str)
-    parser.add_argument("--faiss_bin_path", required=True, type=str)
+    parser.add_argument("--faiss_bin_path", required=False, type=str, default='data_index.bin')
     parser.add_argument("--test_image_path", required=True, type=str)
     parser.add_argument("--top_k", required=False, type=int, default=11)
     parser.add_argument("--visual", required=False, type=bool, default=False)
